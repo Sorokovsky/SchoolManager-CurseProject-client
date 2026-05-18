@@ -6,7 +6,7 @@ import { createBrowserRouter } from "react-router";
 const pupilsPage: Route = {
   element: <div>Учні</div>,
   path: "/pupils",
-  role: null,
+  roles: null,
   isAuthenticated: true,
   title: "Учні"
 };
@@ -14,7 +14,7 @@ const pupilsPage: Route = {
 const parentsPage: Route = {
   path: '/parents',
   element: <div>Батьки</div>,
-  role: null,
+  roles: null,
   isAuthenticated: true,
   title: "Батьки"
 };
@@ -23,14 +23,14 @@ const employeesPage: Route = {
   path: '/employees',
   isAuthenticated: true,
   element: <div>Працівники</div>,
-  role: null,
+  roles: null,
   title: "Працівники"
 };
 const schedulesPage: Route = {
   path: '/schedules',
   isAuthenticated: true,
   element: <div>Розклад</div>,
-  role: null,
+  roles: null,
   title: "Розклад"
 };
 
@@ -38,7 +38,7 @@ const registerPage: Route = {
   path: "/register",
   isAuthenticated: false,
   element: <div>Реєстрація</div>,
-  role: null,
+  roles: null,
   title: "Реєстрація"
 }
 
@@ -46,7 +46,7 @@ export const loginPage: Route = {
   path: "/login",
   isAuthenticated: false,
   element: <Login />,
-  role: null,
+  roles: null,
   title: "Вхід"
 }
 

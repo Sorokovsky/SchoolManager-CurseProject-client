@@ -14,8 +14,6 @@ export const useGuard = () => {
     if (isLoading || !page) return;
     const hasAccess = prepared.includes(page);
     if (!hasAccess) {
-      console.log(data);
-
       if (data) {
         navigate("/");
       } else {

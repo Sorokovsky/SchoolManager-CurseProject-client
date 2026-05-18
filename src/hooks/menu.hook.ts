@@ -9,7 +9,7 @@ export const useMenu = (menu: Route[]): Route[] => {
   return menu.filter((item) => {
     return (
       !!user === item.isAuthenticated &&
-      (item.role == null ? true : item.role === user?.role)
+      (item.roles == null ? true : item.roles.includes(user?.role))
     );
   });
 };
