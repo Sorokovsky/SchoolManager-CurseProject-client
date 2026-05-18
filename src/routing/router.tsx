@@ -1,4 +1,5 @@
 import { Login } from "@/components/pages/login/login";
+import { Register } from "@/components/pages/register/register";
 import { MainLayout } from "@/components/сommon/layout/MainLayout";
 import type { Route } from "@/types/route.type";
 import { createBrowserRouter } from "react-router";
@@ -37,7 +38,7 @@ const schedulesPage: Route = {
 const registerPage: Route = {
   path: "/register",
   isAuthenticated: false,
-  element: <div>Реєстрація</div>,
+  element: <Register />,
   roles: null,
   title: "Реєстрація"
 }

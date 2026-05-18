@@ -1,0 +1,16 @@
+.gender {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .title {
+    font-size: 22px;
+    font-weight: bold;
+    }
+    .label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-direction: row-reverse;
+        max-width: fit-content;
+    }
+}
