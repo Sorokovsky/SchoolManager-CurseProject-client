@@ -1,0 +1,20 @@
+.field {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            span {
+                font-size: 24px;
+                font-weight: bold;
+            }
+            input {
+                font-size: 18px;
+                padding: 10px 5px;
+                border-radius: 10px;
+                outline: none;
+                border: 1px solid grey;
+                transition: .3s all ease;
+                &:focus, &:hover {
+                    border-color: #000;
+                }
+            }
+        }
