@@ -1,0 +1,15 @@
+.menu {
+            color: #fff;
+            font-size: 20px;
+            ul {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            a {
+                transition: .3s all ease;
+                &:hover {
+                    color: #ffffffb5;
+                }
+            }
+        }

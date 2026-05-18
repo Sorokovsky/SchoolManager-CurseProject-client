@@ -1,0 +1,42 @@
+.login {
+    border: 1px solid grey;
+    padding: 15px;
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            span {
+                font-size: 24px;
+                font-weight: bold;
+            }
+            input {
+                font-size: 18px;
+                padding: 10px 5px;
+                border-radius: 10px;
+                outline: none;
+                border: 1px solid grey;
+                transition: .3s all ease;
+                &:focus, &:hover {
+                    border-color: #000;
+                }
+            }
+        }
+        .button {
+            font-size: 22px;
+            padding: 10px 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid grey;
+            background-color: #087ec6;
+            color: #fff;
+            transition: .3s all ease;
+        }
+    }
+    .title {
+        text-align: center;
+    }
+}
