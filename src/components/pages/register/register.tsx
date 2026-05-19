@@ -4,7 +4,6 @@ import { Form } from "@/components/ui/form/form";
 import type { RegisterPayload } from "@/types/register.type";
 import type { FC, JSX } from "react";
 import { useForm } from "react-hook-form";
-import styles from "./register.module.scss";
 import { useRegister } from "@/hooks/register.hook";
 import { Gender } from "@/components/ui/gender/gender";
 
@@ -20,7 +19,7 @@ export const Register: FC = (): JSX.Element => {
     }
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className={styles.title}>Вхід</h1>
+            <h1 className={"title"}>Вхід</h1>
             <Field
                 type="text"
                 label="Логін"

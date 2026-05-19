@@ -1,0 +1,10 @@
+.table {
+    td {
+        padding: 3px 10px;
+        .flex {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    }
+}

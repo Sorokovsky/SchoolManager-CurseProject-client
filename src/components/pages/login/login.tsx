@@ -2,7 +2,6 @@ import { useLogin } from "@/hooks/login.hook";
 import type { LoginPayload } from "@/types/login.type";
 import type { FC, JSX } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import styles from "./login.module.scss";
 import { Form } from "@/components/ui/form/form";
 import { Field } from "@/components/ui/field/field";
 import { Button } from "@/components/ui/button/button";
@@ -16,7 +15,7 @@ export const Login: FC = (): JSX.Element => {
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className={styles.title}>Вхід</h1>
+            <h1 className={"title"}>Вхід</h1>
             <Field
                 type="text"
                 label="Логін"

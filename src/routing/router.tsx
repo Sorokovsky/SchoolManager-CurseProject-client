@@ -1,3 +1,4 @@
+import { Employees } from "@/components/pages/employees/employees";
 import { Login } from "@/components/pages/login/login";
 import { Register } from "@/components/pages/register/register";
 import { MainLayout } from "@/components/сommon/layout/MainLayout";
@@ -7,7 +8,7 @@ import { createBrowserRouter } from "react-router";
 const pupilsPage: Route = {
   element: <div>Учні</div>,
   path: "/pupils",
-  roles: null,
+  roles: ["EMPLOYEE"],
   isAuthenticated: true,
   title: "Учні"
 };
@@ -15,7 +16,7 @@ const pupilsPage: Route = {
 const parentsPage: Route = {
   path: '/parents',
   element: <div>Батьки</div>,
-  roles: null,
+  roles: ["EMPLOYEE"],
   isAuthenticated: true,
   title: "Батьки"
 };
@@ -23,15 +24,15 @@ const parentsPage: Route = {
 const employeesPage: Route = {
   path: '/employees',
   isAuthenticated: true,
-  element: <div>Працівники</div>,
-  roles: null,
+  element: <Employees />,
+  roles: ["ADMIN"],
   title: "Працівники"
 };
 const schedulesPage: Route = {
   path: '/schedules',
   isAuthenticated: true,
   element: <div>Розклад</div>,
-  roles: null,
+  roles: ["PUPIL", "EMPLOYEE"],
   title: "Розклад"
 };
 
