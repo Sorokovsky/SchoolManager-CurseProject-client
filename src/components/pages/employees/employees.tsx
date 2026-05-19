@@ -5,6 +5,8 @@ import styles from "./employees.module.scss";
 import { Link, useNavigate } from "react-router";
 import { employeesPage, newEmployee } from "@/routing/router";
 import { Button } from "@/components/ui/button/button";
+import { useAddPosition } from "@/hooks/add-position.hook";
+import { usePositions } from "@/hooks/positions.hook";
 
 function calculateSalary(positions: Position[]): number {
     let result = 0;
@@ -16,7 +18,9 @@ function calculateSalary(positions: Position[]): number {
 
 export const Employees: FC = (): JSX.Element => {
     const { data } = useEmployees();
+    const { data: positions } = usePositions();
     const navigate = useNavigate();
+    const { mutate: addPosition } = useAddPosition();
     const onClick = () => {
         navigate(newEmployee.path);
     }
@@ -41,7 +45,14 @@ export const Employees: FC = (): JSX.Element => {
                                 <td>{calculateSalary(employee.positions)} грн</td>
                                 <td>
                                     <div className={styles.flex}>
-                                        {employee.positions.map((position => <span key={position.id}>{position.name}</span>))}
+                                        {employee.positions.length !== 0 ?
+                                            employee.positions.map((position => <span key={position.id}>{position.name}</span>))
+                                            : <select name="positionId">
+                                                {positions.map((position => {
+                                                    return <option key={position.id} value={position.id}>{position.name}</option>
+                                                }))}
+                                            </select>
+                                        }
                                     </div>
                                 </td>
                             </tr>
