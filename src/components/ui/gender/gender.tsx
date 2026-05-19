@@ -15,7 +15,7 @@ export const Gender: FC<GenderProps> = ({...rest}): JSX.Element => {
             </label>
             <label className={styles.label}>
                 <span>Жіна</span>
-                <input type="radio" {...rest} value={"false"} />
+                <input type="radio" {...rest} value={"true"} />
             </label>
         </div>
     );
