@@ -19,7 +19,7 @@ export class EmployeesService {
 
   public async addPosition(payload: AddPosition): Promise<Employee> {
     const response = await client.put(
-      `${EmployeesService.EMPLOYEES}/${payload.id}/${payload.positionId}`,
+      `${EmployeesService.ADD_POSITION}/${payload.id}/${payload.positionId}`,
     );
     return response.data;
   }
