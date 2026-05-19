@@ -19,7 +19,7 @@ export const Register: FC = (): JSX.Element => {
     }
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className={"title"}>Вхід</h1>
+            <h1 className={"title"}>Реєстрація</h1>
             <Field
                 type="text"
                 label="Логін"
@@ -69,7 +69,7 @@ export const Register: FC = (): JSX.Element => {
                 {...register('birthday', { required: true })}
                 required={true}
             />
-            <Gender name="gender" />
+            <Gender {...register('gender')} />
             <Button type="submit">Увійти</Button>
         </Form>
     );

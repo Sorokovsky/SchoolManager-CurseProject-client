@@ -1,5 +1,6 @@
 import { Employees } from "@/components/pages/employees/employees";
 import { Login } from "@/components/pages/login/login";
+import { NewEmployee } from "@/components/pages/new-employee/new-employee";
 import { Register } from "@/components/pages/register/register";
 import { MainLayout } from "@/components/сommon/layout/MainLayout";
 import type { Route } from "@/types/route.type";
@@ -21,7 +22,15 @@ const parentsPage: Route = {
   title: "Батьки"
 };
 
-const employeesPage: Route = {
+export const newEmployee: Route = {
+  path: "/employees/new",
+  element: <NewEmployee />,
+  roles: ["ADMIN"],
+  isAuthenticated: true,
+  title: "Новий працівник"
+}
+
+export const employeesPage: Route = {
   path: '/employees',
   isAuthenticated: true,
   element: <Employees />,
@@ -54,7 +63,7 @@ export const loginPage: Route = {
 
 export const navigationPages: Route[] = [pupilsPage, parentsPage, employeesPage, schedulesPage];
 export const authorizationPages: Route[] = [registerPage, loginPage];
-export const allPages: Route[] = [...navigationPages, ...authorizationPages];
+export const allPages: Route[] = [...navigationPages, ...authorizationPages, newEmployee];
 
 export const router = createBrowserRouter([
   {

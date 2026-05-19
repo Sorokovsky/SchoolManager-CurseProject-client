@@ -9,7 +9,7 @@ export const useGuard = () => {
   const { data, isLoading } = useProfile();
   const navigate = useNavigate();
   const location = useLocation();
-  const page = allPages.find((page) => page.path === location.pathname);
+  const page = allPages.find((page) => location.pathname.includes(page.path));
   useEffect(() => {
     if (isLoading || !page) return;
     const hasAccess = prepared.includes(page);
