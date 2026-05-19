@@ -24,6 +24,12 @@ export const Employees: FC = (): JSX.Element => {
     const onClick = () => {
         navigate(newEmployee.path);
     }
+    const onChange = (event, employeeId) => {
+        const value = event.target.value;
+        if (value === "null") return;
+        const id = Number(value);
+        addPosition({id: employeeId, positionId: id})
+    }
     return (
         <>
             <h1 className="title">Працівники</h1>
@@ -47,7 +53,8 @@ export const Employees: FC = (): JSX.Element => {
                                     <div className={styles.flex}>
                                         {employee.positions.length !== 0 ?
                                             employee.positions.map((position => <span key={position.id}>{position.name}</span>))
-                                            : <select name="positionId">
+                                            : <select name="positionId" onChange={(event) => onChange(event, employee.id)}>
+                                                <option defaultChecked value={"null"}>Не вибрано</option>
                                                 {positions.map((position => {
                                                     return <option key={position.id} value={position.id}>{position.name}</option>
                                                 }))}

@@ -5,6 +5,7 @@ import { client } from "@/utils/http-client";
 
 export class EmployeesService {
   private static readonly EMPLOYEES: string = "/employees";
+  private static readonly ADD_POSITION: string = `${EmployeesService.EMPLOYEES}/add-position`;
 
   public async getAll(): Promise<Employee[]> {
     const response = await client.get(EmployeesService.EMPLOYEES);
@@ -17,7 +18,9 @@ export class EmployeesService {
   }
 
   public async addPosition(payload: AddPosition): Promise<Employee> {
-    const response = await client.post(EmployeesService.EMPLOYEES, payload);
+    const response = await client.put(
+      `${EmployeesService.EMPLOYEES}/${payload.id}/${payload.positionId}`,
+    );
     return response.data;
   }
 }
