@@ -1,6 +1,6 @@
 import { useEmployees } from "@/hooks/employees.hook";
 import type { Position } from "@/types/position.type";
-import type { FC, JSX } from "react";
+import type { FC, JSX, ReactNode } from "react";
 import styles from "./employees.module.scss";
 import { Link, useNavigate } from "react-router";
 import { employeesPage, newEmployee } from "@/routing/router";
@@ -9,6 +9,7 @@ import { useAddPosition } from "@/hooks/add-position.hook";
 import { usePositions } from "@/hooks/positions.hook";
 import { useUsers } from "@/hooks/users.hook";
 import { convertGender } from "@/utils/gender.util";
+import { Table } from "@/components/ui/table/table";
 
 function calculateSalary(positions: Position[]): number {
     let result = 0;
@@ -19,7 +20,7 @@ function calculateSalary(positions: Position[]): number {
 }
 
 export const Employees: FC = (): JSX.Element => {
-    const { data } = useEmployees();
+    const { data: employees } = useEmployees();
     const { data: positions } = usePositions();
     const navigate = useNavigate();
     const { mutate: addPosition } = useAddPosition();
@@ -33,30 +34,21 @@ export const Employees: FC = (): JSX.Element => {
         const id = Number(value);
         addPosition({ id: employeeId, positionId: id });
     }
-    return (
-        <>
-            <h1 className="title">Працівники</h1>
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <td>Логін</td>
-                        <td>ПІБ</td>
-                        <td>Оклад</td>
-                        <td>Посади</td>
-                        <td>Стать</td>
-                        <td>Номер телефону</td>
-                        <td>День народження</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data?.map((employee => {
-                        return (
-                            <tr key={employee.login}>
-                                <td><Link to={`${employeesPage}/${employee.id}`}>{employee.login}</Link></td>
-                                <td>{`${employee.lastName} ${employee.firstName} ${employee.middleName}`}</td>
-                                <td>{calculateSalary(employee.positions)} грн</td>
-                                <td>
-                                    <div className={styles.flex}>
+    const headers: ReactNode[] = [
+        <>Логін</>,
+        <>ПІБ</>,
+        <>Оклад</>,
+        <>Посади</>,
+        <>Стать</>,
+        <>Номер телефону</>,
+        <>День народження</>
+    ]
+
+    const data: ReactNode[][] = employees === undefined ? [] : employees.map(employee => [
+        <Link to={`${employeesPage}/${employee.id}`}>{employee.login}</Link>,
+        `${employee.lastName} ${employee.firstName} ${employee.middleName}`,
+        <>{calculateSalary(employee.positions)} грн</>,
+        <div className={styles.flex}>
                                         {employee.positions.length !== 0 ?
                                             employee.positions.map((position => <span key={position.id}>{position.name}</span>))
                                             : <select name="positionId" onChange={(event) => onChange(event, employee.id)}>
@@ -66,16 +58,15 @@ export const Employees: FC = (): JSX.Element => {
                                                 }))}
                                             </select>
                                         }
-                                    </div>
-                                </td>
-                                <td>{convertGender(employee.gender)}</td>
-                                <td>{employee.phoneNumber}</td>
-                                <td>{employee.birthday.toString()}</td>
-                            </tr>
-                        );
-                    }))}
-                </tbody>
-            </table>
+        </div>,
+        convertGender(employee.gender),
+        employee.phoneNumber,
+        employee.birthday.toString()
+    ])
+    return (
+        <>
+            <h1 className="title">Працівники</h1>
+            <Table headers={headers} data={data} />
             {
                 (users && users.length !== 0) && <Button type="button" onClick={onClick}>Новий</Button>
             }

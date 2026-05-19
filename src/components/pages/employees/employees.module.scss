@@ -1,11 +1,5 @@
-.table {
-    td {
-        padding: 3px 10px;
-        border: 1px solid grey;
-        .flex {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-    }
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
