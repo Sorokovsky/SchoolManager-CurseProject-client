@@ -45,7 +45,7 @@ export const Employees: FC = (): JSX.Element => {
     ]
 
     const data: ReactNode[][] = employees === undefined ? [] : employees.map(employee => [
-        <Link to={`${employeesPage}/${employee.id}`}>{employee.login}</Link>,
+        <Link to={`${employeesPage.path}/${employee.id}`}>{employee.login}</Link>,
         `${employee.lastName} ${employee.firstName} ${employee.middleName}`,
         <>{calculateSalary(employee.positions)} грн</>,
         <div className={styles.flex}>

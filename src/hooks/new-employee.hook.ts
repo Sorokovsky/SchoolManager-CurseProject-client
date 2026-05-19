@@ -1,5 +1,5 @@
 import { EMPLOYEES_KEY, NEW_EMPLOYEE } from "@/constants/query-keys.constants";
-import { EmployeesService } from "@/services/eemployees.service";
+import { EmployeesService } from "@/services/employees.service";
 import type { NewEmployee } from "@/types/new-employee.type";
 import { useMutating } from "./mutate.hook";
 
