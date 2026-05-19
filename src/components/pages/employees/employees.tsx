@@ -7,6 +7,7 @@ import { employeesPage, newEmployee } from "@/routing/router";
 import { Button } from "@/components/ui/button/button";
 import { useAddPosition } from "@/hooks/add-position.hook";
 import { usePositions } from "@/hooks/positions.hook";
+import { useUsers } from "@/hooks/users.hook";
 
 function calculateSalary(positions: Position[]): number {
     let result = 0;
@@ -21,6 +22,7 @@ export const Employees: FC = (): JSX.Element => {
     const { data: positions } = usePositions();
     const navigate = useNavigate();
     const { mutate: addPosition } = useAddPosition();
+    const { data: users } = useUsers();
     const onClick = () => {
         navigate(newEmployee.path);
     }
@@ -67,7 +69,9 @@ export const Employees: FC = (): JSX.Element => {
                     }))}
                 </tbody>
             </table>
-            <Button type="button" onClick={onClick}>Новий</Button>
+            {
+                (users && users.length !== 0) && <Button type="button" onClick={onClick}>Новий</Button>
+            }
         </>
     );
 }
