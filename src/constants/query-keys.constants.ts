@@ -7,3 +7,4 @@ export const USERS_KEY: string = "users";
 export const NEW_EMPLOYEE: string = "new employee";
 export const ADD_POSITION: string = "add position";
 export const GET_POSITIONS: string = "get positions";
+export const NEW_POSITION: string = "new position";

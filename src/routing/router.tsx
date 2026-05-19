@@ -1,6 +1,8 @@
 import { Employees } from "@/components/pages/employees/employees";
 import { Login } from "@/components/pages/login/login";
 import { NewEmployee } from "@/components/pages/new-employee/new-employee";
+import { NewPosition } from "@/components/pages/new-position/new-position";
+import { Positions } from "@/components/pages/positions/positions";
 import { Register } from "@/components/pages/register/register";
 import { MainLayout } from "@/components/сommon/layout/MainLayout";
 import type { Route } from "@/types/route.type";
@@ -61,9 +63,24 @@ export const loginPage: Route = {
   title: "Вхід"
 }
 
-export const navigationPages: Route[] = [pupilsPage, parentsPage, employeesPage, schedulesPage];
+export const positionsPage: Route = {
+  path: "/positions",
+  isAuthenticated: true,
+  roles: ["ADMIN"],
+  element: <Positions />,
+  title: "Посади"
+}
+export const newPositionsPage: Route = {
+  path: "/positions/new",
+  isAuthenticated: true,
+  roles: ["ADMIN"],
+  element: <NewPosition />,
+  title: "Нова посада"
+}
+
+export const navigationPages: Route[] = [pupilsPage, parentsPage, employeesPage, schedulesPage, positionsPage];
 export const authorizationPages: Route[] = [registerPage, loginPage];
-export const allPages: Route[] = [...navigationPages, ...authorizationPages, newEmployee];
+export const allPages: Route[] = [...navigationPages, ...authorizationPages, newEmployee, newPositionsPage];
 
 export const router = createBrowserRouter([
   {
