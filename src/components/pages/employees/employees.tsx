@@ -8,6 +8,7 @@ import { useUsers } from "@/hooks/users.hook";
 import { convertGender } from "@/utils/gender.util";
 import { Table } from "@/components/ui/table/table";
 import { EmployeePositions } from "@/components/сommon/employee-positions/employee-positions";
+import styles from "./employees.module.scss";
 
 function calculateSalary(positions: Position[]): number {
     let result = 0;
@@ -33,7 +34,8 @@ export const Employees: FC = (): JSX.Element => {
         <>Стать</>,
         <>Номер телефону</>,
         <>День народження</>,
-        <>Адреса</>
+        <>Адреса</>,
+        <>Паспорти</>
     ]
 
     const data: ReactNode[][] = employees === undefined ? [] : employees.map(employee => [
@@ -44,7 +46,8 @@ export const Employees: FC = (): JSX.Element => {
         convertGender(employee.gender),
         employee.phoneNumber,
         employee.birthday.toString(),
-        employee.address
+        employee.address,
+        <div className={styles.flex}>{employee.passports.map((passport) => <span key={passport.id}>{passport.name}</span>)}</div>
     ])
     return (
         <>
