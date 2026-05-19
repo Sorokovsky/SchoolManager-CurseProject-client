@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button/button";
 import { useAddPosition } from "@/hooks/add-position.hook";
 import { usePositions } from "@/hooks/positions.hook";
 import { useUsers } from "@/hooks/users.hook";
+import { convertGender } from "@/utils/gender.util";
 
 function calculateSalary(positions: Position[]): number {
     let result = 0;
@@ -42,6 +43,9 @@ export const Employees: FC = (): JSX.Element => {
                         <td>ПІБ</td>
                         <td>Оклад</td>
                         <td>Посади</td>
+                        <td>Стать</td>
+                        <td>Номер телефону</td>
+                        <td>День народження</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,6 +68,9 @@ export const Employees: FC = (): JSX.Element => {
                                         }
                                     </div>
                                 </td>
+                                <td>{convertGender(employee.gender)}</td>
+                                <td>{employee.phoneNumber}</td>
+                                <td>{employee.birthday.toString()}</td>
                             </tr>
                         );
                     }))}
