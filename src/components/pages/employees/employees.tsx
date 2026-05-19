@@ -28,7 +28,7 @@ export const Employees: FC = (): JSX.Element => {
         const value = event.target.value;
         if (value === "null") return;
         const id = Number(value);
-        addPosition({id: employeeId, positionId: id})
+        addPosition({ id: employeeId, positionId: id });
     }
     return (
         <>
