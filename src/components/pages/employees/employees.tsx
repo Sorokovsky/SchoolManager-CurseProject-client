@@ -1,15 +1,13 @@
 import { useEmployees } from "@/hooks/employees.hook";
 import type { Position } from "@/types/position.type";
 import type { FC, JSX, ReactNode } from "react";
-import styles from "./employees.module.scss";
 import { Link, useNavigate } from "react-router";
 import { employeesPage, newEmployee } from "@/routing/router";
 import { Button } from "@/components/ui/button/button";
-import { useAddPosition } from "@/hooks/add-position.hook";
-import { usePositions } from "@/hooks/positions.hook";
 import { useUsers } from "@/hooks/users.hook";
 import { convertGender } from "@/utils/gender.util";
 import { Table } from "@/components/ui/table/table";
+import { EmployeePositions } from "@/components/сommon/employee-positions/employee-positions";
 
 function calculateSalary(positions: Position[]): number {
     let result = 0;
@@ -21,19 +19,12 @@ function calculateSalary(positions: Position[]): number {
 
 export const Employees: FC = (): JSX.Element => {
     const { data: employees } = useEmployees();
-    const { data: positions } = usePositions();
     const navigate = useNavigate();
-    const { mutate: addPosition } = useAddPosition();
     const { data: users } = useUsers();
     const onClick = () => {
         navigate(newEmployee.path);
     }
-    const onChange = (event, employeeId) => {
-        const value = event.target.value;
-        if (value === "null") return;
-        const id = Number(value);
-        addPosition({ id: employeeId, positionId: id });
-    }
+    
     const headers: ReactNode[] = [
         <>Логін</>,
         <>ПІБ</>,
@@ -41,27 +32,19 @@ export const Employees: FC = (): JSX.Element => {
         <>Посади</>,
         <>Стать</>,
         <>Номер телефону</>,
-        <>День народження</>
+        <>День народження</>,
+        <>Адреса</>
     ]
 
     const data: ReactNode[][] = employees === undefined ? [] : employees.map(employee => [
         <Link to={`${employeesPage.path}/${employee.id}`}>{employee.login}</Link>,
         `${employee.lastName} ${employee.firstName} ${employee.middleName}`,
         <>{calculateSalary(employee.positions)} грн</>,
-        <div className={styles.flex}>
-                                        {employee.positions.length !== 0 ?
-                                            employee.positions.map((position => <span key={position.id}>{position.name}</span>))
-                                            : <select name="positionId" onChange={(event) => onChange(event, employee.id)}>
-                                                <option defaultChecked value={"null"}>Не вибрано</option>
-                                                {positions.map((position => {
-                                                    return <option key={position.id} value={position.id}>{position.name}</option>
-                                                }))}
-                                            </select>
-                                        }
-        </div>,
+        <EmployeePositions positions={employee.positions} employeeId={employee.id} />,
         convertGender(employee.gender),
         employee.phoneNumber,
-        employee.birthday.toString()
+        employee.birthday.toString(),
+        employee.address
     ])
     return (
         <>
