@@ -1,19 +1,20 @@
 import { Button } from "@/components/ui/button/button";
 import { Table } from "@/components/ui/table/table";
+import { NewPosition } from "@/components/сommon/new-position/new-position";
 import { useDeletePosition } from "@/hooks/delete-position.hook";
+import { useNewPosition } from "@/hooks/new-position.hook";
 import { usePositions } from "@/hooks/positions.hook";
 import { useProfile } from "@/hooks/profile.hook";
-import { newPositionsPage } from "@/routing/router";
-import type { FC, JSX, ReactNode } from "react";
-import { useNavigate } from "react-router";
+import { useState, type FC, type JSX, type ReactNode } from "react";
 
 export const Positions: FC = (): JSX.Element => {
     const { data: positions } = usePositions();
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const { mutate: addPosition } = useNewPosition();
     const { data: user } = useProfile();
     const { mutate} = useDeletePosition();
-    const navigate = useNavigate();
     const onClick = () => {
-        navigate(newPositionsPage.path)
+        setIsOpen(true);
     }
     const deletePosition = (id: number) => {
         mutate(id);
@@ -35,6 +36,7 @@ export const Positions: FC = (): JSX.Element => {
             {
                 (user && user.role.includes("ADMIN")) && <Button type="button" onClick={onClick}>Нова посада</Button>
             }
+            <NewPosition close={() => setIsOpen(false)} isOpen={isOpen} send={addPosition} />
         </>
     );
 }

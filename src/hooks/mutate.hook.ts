@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export const useMutating = <Input, Output>(
   keys: string[],
@@ -9,11 +10,14 @@ export const useMutating = <Input, Output>(
   return useMutation({
     mutationKey: keys,
     mutationFn: (data: Input) => mutationFunction(data),
-    onError: (error) => {
-      console.log(error);
+    onError: (error: { title: string }) => {
+      toast.error(error.title);
     },
     onSuccess: async () => {
-      await client.invalidateQueries({ queryKey: refreshKeys, refetchType: "all" });
+      await client.invalidateQueries({
+        queryKey: refreshKeys,
+        refetchType: "all",
+      });
     },
   });
 };

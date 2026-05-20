@@ -30,5 +30,7 @@ client.interceptors.response.use(
     bearerStorage.setToken(header.replace("Bearer ", ""));
     return response;
   },
-  (error) => Promise.reject(error),
+  (error) => {
+    return Promise.reject(error.response?.data);
+  },
 );

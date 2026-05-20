@@ -2,6 +2,7 @@ import { RouterProvider } from 'react-router';
 import './App.scss';
 import { router } from '@/routing/router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'sonner';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -20,6 +21,7 @@ const client = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={client}>
+      <Toaster position='top-right' />
       <RouterProvider router={router} />
       </QueryClientProvider>
   )

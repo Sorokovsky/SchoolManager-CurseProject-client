@@ -12,8 +12,6 @@ export const Register: FC = (): JSX.Element => {
     const { mutate } = useRegister();
     const onSubmit = (payload: RegisterPayload) => {
         const user = { ...payload, role: "USER" };
-        console.log(user);
-        
         mutate(user);
         
     }
