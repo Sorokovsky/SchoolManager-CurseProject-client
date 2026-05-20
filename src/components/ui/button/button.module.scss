@@ -1,10 +1,13 @@
 .button {
-            font-size: 22px;
-            padding: 10px 5px;
-            border-radius: 10px;
-            cursor: pointer;
-            border: 1px solid grey;
-            background-color: #087ec6;
-            color: #fff;
-            transition: .3s all ease;
-        }
+    font-size: 22px;
+    padding: 10px 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid grey;
+    background-color: #087ec6;
+    color: #fff;
+    transition: .3s all ease;
+    &:hover {
+        background-color: #089bf6;
+    }
+}
