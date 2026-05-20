@@ -23,7 +23,7 @@ export const Positions: FC = (): JSX.Element => {
         position.name,
         position.salary,
         position.requirements
-            .map(requirement => <span title={requirement.description} key={requirement.id}>{requirement.name}  </span>),
+            .map(requirement => <span title={requirement.description} key={requirement.id}>{requirement.name} </span>),
         position.responsibilities
             .map(resposibility => <span title={resposibility.description} key={resposibility.id}>{resposibility.name}  </span>),
         <Button onClick={() => deletePosition(position.id)} type="button">Видалити</Button>
@@ -33,7 +33,7 @@ export const Positions: FC = (): JSX.Element => {
             <h1 className="title">Посади</h1>
             <Table headers={headers} data={data} />
             {
-                user && <Button type="button" onClick={onClick}>Нова посада</Button>
+                (user && user.role.includes("ADMIN")) && <Button type="button" onClick={onClick}>Нова посада</Button>
             }
         </>
     );
