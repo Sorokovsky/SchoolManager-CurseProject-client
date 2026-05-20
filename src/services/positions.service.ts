@@ -14,4 +14,9 @@ export class PositionsService {
     const response = await client.post(PositionsService.POSITIONS, payload);
     return response.data;
   }
+
+  public async delete(id: number): Promise<void> {
+    const response = await client.delete(`${PositionsService.POSITIONS}/${id}`);
+    return response.data;
+  }
 }

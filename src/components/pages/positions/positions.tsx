@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button/button";
 import { Table } from "@/components/ui/table/table";
+import { useDeletePosition } from "@/hooks/delete-position.hook";
 import { usePositions } from "@/hooks/positions.hook";
 import { useProfile } from "@/hooks/profile.hook";
 import { newPositionsPage } from "@/routing/router";
@@ -9,18 +10,23 @@ import { useNavigate } from "react-router";
 export const Positions: FC = (): JSX.Element => {
     const { data: positions } = usePositions();
     const { data: user } = useProfile();
-    const headers: ReactNode[] = ["Назва посади", "Оклад", "Вимоги", "Відповідальності"];
+    const { mutate} = useDeletePosition();
     const navigate = useNavigate();
     const onClick = () => {
         navigate(newPositionsPage.path)
     }
+    const deletePosition = (id: number) => {
+        mutate(id);
+    }
+    const headers: ReactNode[] = ["Назва посади", "Оклад", "Вимоги", "Відповідальності"];
     const data: ReactNode[][] = positions === undefined ? [] : positions.map(position => [
         position.name,
         position.salary,
         position.requirements
             .map(requirement => <span title={requirement.description} key={requirement.id}>{requirement.name}  </span>),
         position.responsibilities
-            .map(resposibility => <span title={resposibility.description} key={resposibility.id}>{resposibility.name}  </span>)
+            .map(resposibility => <span title={resposibility.description} key={resposibility.id}>{resposibility.name}  </span>),
+        <Button onClick={() => deletePosition(position.id)} type="button">Видалити</Button>
     ]);
     return (
         <>
