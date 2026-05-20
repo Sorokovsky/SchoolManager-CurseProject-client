@@ -14,3 +14,5 @@ export const DELETE_RESPONIBILITIES: string = "delete responsibilities";
 export const GET_REQUIREMENTS: string = "get requirements";
 export const DELETE_REQUIREMENTS: string = "delete requirements";
 export const REMOVE_POSITION: string = "remove position";
+export const ADD_PASSPORT: string = "add passport";
+export const REMOVE_PASSPORT: string = "add passport";

@@ -1,6 +1,6 @@
 import { useEmployees } from "@/hooks/employees.hook";
 import type { Position } from "@/types/position.type";
-import type { FC, JSX, ReactNode } from "react";
+import { useState, type FC, type JSX, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router";
 import { employeesPage, newEmployee } from "@/routing/router";
 import { Button } from "@/components/ui/button/button";
@@ -9,6 +9,8 @@ import { convertGender } from "@/utils/gender.util";
 import { Table } from "@/components/ui/table/table";
 import { EmployeePositions } from "@/components/сommon/employee-positions/employee-positions";
 import styles from "./employees.module.scss";
+import { NewPassport } from "@/components/сommon/new-passport/new-passport";
+import { useAddPassport } from "@/hooks/add-passport.hook";
 
 function calculateSalary(positions: Position[]): number {
     let result = 0;
@@ -20,11 +22,27 @@ function calculateSalary(positions: Position[]): number {
 
 export const Employees: FC = (): JSX.Element => {
     const { data: employees } = useEmployees();
+    const { mutate: createPassport } = useAddPassport();
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [employeeId, setEmployeeId] = useState<number | null>(null);
     const navigate = useNavigate();
     const { data: users } = useUsers();
     const onClick = () => {
         navigate(newEmployee.path);
     }
+
+    const openNewPassport = (employeeId: number) => {
+        setEmployeeId(employeeId);
+        setIsModalOpen(true);
+    }
+
+    const addPassport = (passport: NewPassport) => {
+        closeModal();
+        if (employeeId === null) return;
+        createPassport({ ...passport, employeeId });
+    }
+    
+    const closeModal = () => setIsModalOpen(false);
     
     const headers: ReactNode[] = [
         <>Логін</>,
@@ -47,7 +65,8 @@ export const Employees: FC = (): JSX.Element => {
         employee.phoneNumber,
         employee.birthday.toString(),
         employee.address,
-        <div className={styles.flex}>{employee.passports.map((passport) => <span key={passport.id}>{passport.name}</span>)}</div>
+        <div className={styles.flex}>{employee.passports.map((passport) =>
+            <span key={passport.id}>{passport.name}</span>)} <span onClick={() => openNewPassport(employee.id)} className={styles.add}>+</span></div>
     ])
     return (
         <>
@@ -56,6 +75,7 @@ export const Employees: FC = (): JSX.Element => {
             {
                 (users && users.length !== 0) && <Button type="button" onClick={onClick}>Новий</Button>
             }
+            <NewPassport close={closeModal} isOpen={isModalOpen} send={addPassport} />
         </>
     );
 }

@@ -1,0 +1,41 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(128, 128, 128, 0.631);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s all ease;
+    &.open {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.panel {
+    background-color: white;
+    max-width: 700px;
+    width: 100%;
+    padding: 15px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 10px;
+    .close {
+        font-size: 22px;
+        font-weight: bold;
+        transition: .3s all ease;
+        cursor: pointer;
+        &:hover {
+            transform: rotate(45deg);
+        }
+    }
+}

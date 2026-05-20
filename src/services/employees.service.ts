@@ -1,12 +1,14 @@
 import type { AddPosition } from "@/types/add-position.type";
 import type { Employee } from "@/types/employee.type";
 import type { NewEmployee } from "@/types/new-employee.type";
+import type { NewPassport } from "@/types/new-passport.type";
 import type { RemovePosition } from "@/types/remove-position.type";
 import { client } from "@/utils/http-client";
 
 export class EmployeesService {
   private static readonly EMPLOYEES: string = "/employees";
   private static readonly ADD_POSITION: string = `${EmployeesService.EMPLOYEES}/add-position`;
+  private static readonly ADD_PASSPORT: string = `${EmployeesService.EMPLOYEES}/add-passport`;
   private static readonly REMOVE_POSITION: string = `${EmployeesService.EMPLOYEES}/remove-position`;
 
   public async getAll(): Promise<Employee[]> {
@@ -29,6 +31,14 @@ export class EmployeesService {
   public async removePosition(payload: RemovePosition): Promise<Employee> {
     const response = await client.put(
       `${EmployeesService.REMOVE_POSITION}/${payload.employeeId}/${payload.positionId}`,
+    );
+    return response.data;
+  }
+
+  public async addPassport(payload: NewPassport): Promise<Employee> {
+    const response = await client.put(
+      `${EmployeesService.ADD_PASSPORT}/${payload.employeeId}`,
+      { data: payload.data, name: payload.name },
     );
     return response.data;
   }

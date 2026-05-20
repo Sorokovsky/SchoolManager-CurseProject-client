@@ -3,3 +3,13 @@
     align-items: center;
     gap: 5px;
 }
+
+.add {
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s all ease;
+    &:hover {
+        transform: rotate(45deg);
+    }
+}
