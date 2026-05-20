@@ -4,6 +4,7 @@ import { NewEmployee } from "@/components/pages/new-employee/new-employee";
 import { NewPosition } from "@/components/pages/new-position/new-position";
 import { Positions } from "@/components/pages/positions/positions";
 import { Register } from "@/components/pages/register/register";
+import { Requirements } from "@/components/pages/requirements/requirements";
 import { Responsibilities } from "@/components/pages/responsibilities/responsibilities";
 import { MainLayout } from "@/components/сommon/layout/MainLayout";
 import type { Route } from "@/types/route.type";
@@ -84,10 +85,18 @@ export const responsibilitiesPage: Route = {
   isAuthenticated: true,
   roles: ["ADMIN"],
   element: <Responsibilities />,
+  title: "Відповідальносі"
+};
+
+export const requirementsPage: Route = {
+  path: "/requirements",
+  isAuthenticated: true,
+  roles: ["ADMIN"],
+  element: <Requirements />,
   title: "Вимоги"
 };
 
-export const navigationPages: Route[] = [pupilsPage, parentsPage, employeesPage, schedulesPage, positionsPage, responsibilitiesPage];
+export const navigationPages: Route[] = [pupilsPage, parentsPage, employeesPage, schedulesPage, positionsPage, responsibilitiesPage, requirementsPage];
 export const authorizationPages: Route[] = [registerPage, loginPage];
 export const allPages: Route[] = [...navigationPages, ...authorizationPages, newEmployee, newPositionsPage];
 
