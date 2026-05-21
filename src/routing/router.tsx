@@ -1,4 +1,5 @@
 import { ClassTypes } from "@/components/pages/class-types/class-types";
+import { Classes } from "@/components/pages/classes/classes";
 import { Employees } from "@/components/pages/employees/employees";
 import { Login } from "@/components/pages/login/login";
 import { NewEmployee } from "@/components/pages/new-employee/new-employee";
@@ -98,6 +99,14 @@ export const classTypesPage: Route = {
   roles: ["ADMIN"]
 }
 
+export const classesPage: Route = {
+  path: "/classes",
+  isAuthenticated: true,
+  title: "Класи",
+  element: <Classes />,
+  roles: ['ADMIN']
+}
+
 export const navigationPages: Route[] = [
   pupilsPage,
   parentsPage,
@@ -107,7 +116,8 @@ export const navigationPages: Route[] = [
   responsibilitiesPage,
   requirementsPage,
   parentsPage,
-  classTypesPage
+  classTypesPage,
+  classesPage
 ];
 export const authorizationPages: Route[] = [registerPage, loginPage];
 export const allPages: Route[] = [...navigationPages, ...authorizationPages, newEmployee];
