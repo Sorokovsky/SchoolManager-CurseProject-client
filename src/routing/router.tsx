@@ -1,6 +1,7 @@
 import { Employees } from "@/components/pages/employees/employees";
 import { Login } from "@/components/pages/login/login";
 import { NewEmployee } from "@/components/pages/new-employee/new-employee";
+import { Parents } from "@/components/pages/parents/parents";
 import { Positions } from "@/components/pages/positions/positions";
 import { Register } from "@/components/pages/register/register";
 import { Requirements } from "@/components/pages/requirements/requirements";
@@ -15,14 +16,6 @@ const pupilsPage: Route = {
   roles: ["EMPLOYEE"],
   isAuthenticated: true,
   title: "Учні"
-};
-
-const parentsPage: Route = {
-  path: '/parents',
-  element: <div>Батьки</div>,
-  roles: ["EMPLOYEE"],
-  isAuthenticated: true,
-  title: "Батьки"
 };
 
 export const newEmployee: Route = {
@@ -88,7 +81,15 @@ export const requirementsPage: Route = {
   title: "Вимоги"
 };
 
-export const navigationPages: Route[] = [pupilsPage, parentsPage, employeesPage, schedulesPage, positionsPage, responsibilitiesPage, requirementsPage];
+export const parentsPage: Route = {
+  path: "/parents",
+  isAuthenticated: true,
+  title: "Батьки",
+  element: <Parents />,
+  roles: ["ADMIN"]
+}
+
+export const navigationPages: Route[] = [pupilsPage, parentsPage, employeesPage, schedulesPage, positionsPage, responsibilitiesPage, requirementsPage, parentsPage];
 export const authorizationPages: Route[] = [registerPage, loginPage];
 export const allPages: Route[] = [...navigationPages, ...authorizationPages, newEmployee];
 
