@@ -27,3 +27,6 @@ export const CREATE_CLASS_TYPE: string = "create class type";
 export const GET_CLASSES: string = "get classes";
 export const DELETE_CLASS: string = "delete class";
 export const CREATE_CLASS: string = "create class";
+export const GET_PUPILS: string = "get pupils";
+export const CREATE_PUPIL: string = "create pupil";
+export const DELETE_PUPIL: string = "delete pupil";

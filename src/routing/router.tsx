@@ -5,6 +5,7 @@ import { Login } from "@/components/pages/login/login";
 import { NewEmployee } from "@/components/pages/new-employee/new-employee";
 import { Parents } from "@/components/pages/parents/parents";
 import { Positions } from "@/components/pages/positions/positions";
+import { Pupils } from "@/components/pages/pupils/pupils";
 import { Register } from "@/components/pages/register/register";
 import { Requirements } from "@/components/pages/requirements/requirements";
 import { Responsibilities } from "@/components/pages/responsibilities/responsibilities";
@@ -13,9 +14,9 @@ import type { Route } from "@/types/route.type";
 import { createBrowserRouter } from "react-router";
 
 const pupilsPage: Route = {
-  element: <div>Учні</div>,
+  element: <Pupils />,
   path: "/pupils",
-  roles: ["EMPLOYEE"],
+  roles: ["EMPLOYEE", "ADMIN"],
   isAuthenticated: true,
   title: "Учні"
 };
