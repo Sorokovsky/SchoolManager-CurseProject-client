@@ -26,3 +26,4 @@ export const DELETE_CLASS_TYPE: string = "delete class type";
 export const CREATE_CLASS_TYPE: string = "create class type";
 export const GET_CLASSES: string = "get classes";
 export const DELETE_CLASS: string = "delete class";
+export const CREATE_CLASS: string = "create class";
