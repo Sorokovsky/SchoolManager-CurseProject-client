@@ -12,7 +12,7 @@ export const Classes: FC = (): JSX.Element => {
     const headers: ReactNode[] = [
         <>Назва класу</>,
         <>Класний керівник</>,
-        <>Кількість ученів</>,
+        <>Кількість учнів</>,
         <>Рік створення</>
     ];
     const data: ReactNode[][] = classess === undefined ? [] : classess.map(clazz => {
