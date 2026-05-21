@@ -16,7 +16,7 @@ export const Pupils: FC = () => {
         <>Батько</>,
         <>Клас</>
     ];
-    const data: ReactNode[][] = pupils.map(pupil => {
+    const data: ReactNode[][] = pupils === undefined ? [] : pupils.map(pupil => {
         return [
             pupil.login,
             `${pupil.lastName} ${pupil.firstName} ${pupil.middleName}`,
