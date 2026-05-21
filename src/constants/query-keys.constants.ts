@@ -21,3 +21,5 @@ export const NEW_RESPONSIBILITY: string = "new responsibility";
 export const GET_PARENTS: string = "get parents";
 export const ADD_PARENT: string = "add parent";
 export const DELETE_PARENT: string = "delete parent";
+export const GET_CLASS_TYPES: string = "get class types";
+export const DELETE_CLASS_TYPE: string = "delete class type";
