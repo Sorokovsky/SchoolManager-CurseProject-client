@@ -23,3 +23,4 @@ export const ADD_PARENT: string = "add parent";
 export const DELETE_PARENT: string = "delete parent";
 export const GET_CLASS_TYPES: string = "get class types";
 export const DELETE_CLASS_TYPE: string = "delete class type";
+export const CREATE_CLASS_TYPE: string = "create class type";
