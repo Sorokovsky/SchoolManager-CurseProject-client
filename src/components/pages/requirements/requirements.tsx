@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button/button";
 import { Table } from "@/components/ui/table/table";
+import { NewRequirement } from "@/components/сommon/new-requirement/new-requirement";
 import { useDeleteRequirement } from "@/hooks/delete-requirement.hook";
 import { useRequirements } from "@/hooks/requirements.hook";
-import type { FC, ReactNode } from "react";
+import { useState, type FC, type ReactNode } from "react";
 
 export const Requirements: FC = () => {
     const { data: requirements } = useRequirements();
     const { mutate: deleteRequirement } = useDeleteRequirement();
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const headers: ReactNode[] = [
         <>Назва</>,
         <>Опис</>
@@ -27,6 +29,8 @@ export const Requirements: FC = () => {
                 headers={headers}
                 data={data}
             />
+            <NewRequirement isOpen={isOpen} close={() => setIsOpen(false)} />
+            <Button onClick={() => setIsOpen(true)} type='button'>Нова вимога</Button>
         </>
     );
 }

@@ -12,6 +12,7 @@ export const DELETE_POSITION: string = "delete position";
 export const GET_RESPONIBILITIES: string = "get responsibilities";
 export const DELETE_RESPONIBILITIES: string = "delete responsibilities";
 export const GET_REQUIREMENTS: string = "get requirements";
+export const CREATE_REQUIEMENTS: string = "create requirement";
 export const DELETE_REQUIREMENTS: string = "delete requirements";
 export const REMOVE_POSITION: string = "remove position";
 export const ADD_PASSPORT: string = "add passport";
