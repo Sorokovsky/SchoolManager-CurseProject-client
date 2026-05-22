@@ -3,28 +3,8 @@ import { Table } from "@/components/ui/table/table";
 import { NewSchedule } from "@/components/сommon/new-schedule/new-schedule";
 import { useDeleteSchedule } from "@/hooks/delete-schedule.hook";
 import { useSchedules } from "@/hooks/schedules.hook";
+import { day } from "@/utils/day.util";
 import { useState, type FC, type JSX, type ReactNode } from "react";
-
-function day(number: number): string {
-    switch (number) {
-        case 1:
-            return "Понеділок"
-        case 2:
-            return "Вівторок"
-        case 3:
-            return "Середа"
-        case 4:
-            return "Четвер"
-        case 5:
-            return "П'ятниця"
-        case 6:
-            return "Субота"
-        case 7:
-            return "Неділя"
-        default:
-            return "Невідомо"
-    }
-}
 
 export const Schedules: FC = (): JSX.Element => {
     const { data: schedules } = useSchedules();

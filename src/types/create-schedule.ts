@@ -4,4 +4,5 @@ export type CreateSchedule = {
   date: Date;
   startTime: string;
   endTime: string;
+  dateOfWeek: number;
 };
