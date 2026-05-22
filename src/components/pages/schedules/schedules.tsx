@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button/button";
 import { Table } from "@/components/ui/table/table";
+import { useDeleteSchedule } from "@/hooks/delete-schedule.hook";
 import { useSchedules } from "@/hooks/schedules.hook";
 import type { FC, JSX, ReactNode } from "react";
 
@@ -25,6 +27,7 @@ function day(number: number): string {
 
 export const Schedules: FC = (): JSX.Element => {
     const { data: schedules } = useSchedules();
+    const { mutate: deleteSchedule } = useDeleteSchedule();
     const headers: ReactNode[] = [
         <>Клас</>,
         <>Дата</>,
@@ -34,14 +37,15 @@ export const Schedules: FC = (): JSX.Element => {
         <>Предмет</>
     ];
     
-    const data: ReactNode[][] = schedules === undefined ? [] : schedules.map(({clazz, date, dateOfWeek, endTime, startTime, subject}) => {
+    const data: ReactNode[][] = schedules === undefined ? [] : schedules.map(({clazz, date, dateOfWeek, endTime, startTime, subject, id}) => {
         return [
             `${clazz.studyYear}-${clazz.letter}`,
             date.toString(),
             day(dateOfWeek),
             startTime,
             endTime,
-            <span title={`${subject.teacher.lastName} ${subject.teacher.firstName} ${subject.teacher.middleName}`}>{subject.name}</span>
+            <span title={`${subject.teacher.lastName} ${subject.teacher.firstName} ${subject.teacher.middleName}`}>{subject.name}</span>,
+            <Button type="button" onClick={() => deleteSchedule(id)}>Видалити</Button>
         ]
     });
     return (

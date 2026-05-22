@@ -8,4 +8,9 @@ export class SchedulesService {
     const response = await client.get(SchedulesService.SCHEDULES);
     return response.data;
   }
+
+  public async delete(id: number): Promise<void> {
+    const response = await client.delete(`${SchedulesService.SCHEDULES}/${id}`);
+    return response.data;
+  }
 }
