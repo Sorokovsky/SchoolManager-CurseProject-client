@@ -30,3 +30,6 @@ export const CREATE_CLASS: string = "create class";
 export const GET_PUPILS: string = "get pupils";
 export const CREATE_PUPIL: string = "create pupil";
 export const DELETE_PUPIL: string = "delete pupil";
+export const GET_SUBJECTS: string = "get subjects";
+export const DELETE_SUBJECT: string = "delete subject";
+export const CREATE_SUBJECT: string = "create subject";

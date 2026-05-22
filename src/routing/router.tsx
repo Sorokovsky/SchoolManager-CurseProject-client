@@ -9,6 +9,7 @@ import { Pupils } from "@/components/pages/pupils/pupils";
 import { Register } from "@/components/pages/register/register";
 import { Requirements } from "@/components/pages/requirements/requirements";
 import { Responsibilities } from "@/components/pages/responsibilities/responsibilities";
+import { Subjects } from "@/components/pages/subjects/subjects";
 import { MainLayout } from "@/components/сommon/layout/MainLayout";
 import type { Route } from "@/types/route.type";
 import { createBrowserRouter } from "react-router";
@@ -108,6 +109,14 @@ export const classesPage: Route = {
   roles: ['ADMIN']
 }
 
+export const subjectsPage: Route = {
+  path: "/subjects",
+  isAuthenticated: true,
+  title: "Предмети",
+  element: <Subjects />,
+  roles: ['ADMIN']
+}
+
 export const navigationPages: Route[] = [
   pupilsPage,
   parentsPage,
@@ -118,7 +127,8 @@ export const navigationPages: Route[] = [
   requirementsPage,
   parentsPage,
   classTypesPage,
-  classesPage
+  classesPage,
+  subjectsPage
 ];
 export const authorizationPages: Route[] = [registerPage, loginPage];
 export const allPages: Route[] = [...navigationPages, ...authorizationPages, newEmployee];
