@@ -1,3 +1,4 @@
+import type { CreateSchedule } from "@/types/create-schedule";
 import type { Schedule } from "@/types/schedule.type";
 import { client } from "@/utils/http-client";
 
@@ -11,6 +12,11 @@ export class SchedulesService {
 
   public async delete(id: number): Promise<void> {
     const response = await client.delete(`${SchedulesService.SCHEDULES}/${id}`);
+    return response.data;
+  }
+
+  public async create(payload: CreateSchedule): Promise<void> {
+    const response = await client.post(SchedulesService.SCHEDULES, payload);
     return response.data;
   }
 }

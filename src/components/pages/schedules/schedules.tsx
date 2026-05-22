@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button/button";
 import { Table } from "@/components/ui/table/table";
+import { NewSchedule } from "@/components/сommon/new-schedule/new-schedule";
 import { useDeleteSchedule } from "@/hooks/delete-schedule.hook";
 import { useSchedules } from "@/hooks/schedules.hook";
-import type { FC, JSX, ReactNode } from "react";
+import { useState, type FC, type JSX, type ReactNode } from "react";
 
 function day(number: number): string {
     switch (number) {
@@ -28,6 +29,7 @@ function day(number: number): string {
 export const Schedules: FC = (): JSX.Element => {
     const { data: schedules } = useSchedules();
     const { mutate: deleteSchedule } = useDeleteSchedule();
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const headers: ReactNode[] = [
         <>Клас</>,
         <>Дата</>,
@@ -52,6 +54,8 @@ export const Schedules: FC = (): JSX.Element => {
         <>
             <h1 className="title">Розклад</h1>
             <Table headers={headers} data={data} />
+            <NewSchedule close={() => setIsOpen(false)} isOpen={isOpen} />
+            <Button type="button" onClick={() => setIsOpen(true)}>Новий рядок розкладу</Button>
         </>
     );
 }
