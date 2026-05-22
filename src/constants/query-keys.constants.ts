@@ -33,3 +33,6 @@ export const DELETE_PUPIL: string = "delete pupil";
 export const GET_SUBJECTS: string = "get subjects";
 export const DELETE_SUBJECT: string = "delete subject";
 export const CREATE_SUBJECT: string = "create subject";
+export const GET_SCHEDULES: string = "get schedules";
+export const CREATE_SCHEDULE: string = "create schedule";
+export const DELETE_SCHEDULE: string = "delete schedule";

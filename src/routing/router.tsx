@@ -9,6 +9,7 @@ import { Pupils } from "@/components/pages/pupils/pupils";
 import { Register } from "@/components/pages/register/register";
 import { Requirements } from "@/components/pages/requirements/requirements";
 import { Responsibilities } from "@/components/pages/responsibilities/responsibilities";
+import { Schedules } from "@/components/pages/schedules/schedules";
 import { Subjects } from "@/components/pages/subjects/subjects";
 import { MainLayout } from "@/components/сommon/layout/MainLayout";
 import type { Route } from "@/types/route.type";
@@ -40,8 +41,8 @@ export const employeesPage: Route = {
 const schedulesPage: Route = {
   path: '/schedules',
   isAuthenticated: true,
-  element: <div>Розклад</div>,
-  roles: ["PUPIL", "EMPLOYEE"],
+  element: <Schedules />,
+  roles: ["PUPIL", "EMPLOYEE", "ADMIN"],
   title: "Розклад"
 };
 
@@ -125,7 +126,6 @@ export const navigationPages: Route[] = [
   positionsPage,
   responsibilitiesPage,
   requirementsPage,
-  parentsPage,
   classTypesPage,
   classesPage,
   subjectsPage
