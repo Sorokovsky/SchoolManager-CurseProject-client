@@ -36,3 +36,4 @@ export const CREATE_SUBJECT: string = "create subject";
 export const GET_SCHEDULES: string = "get schedules";
 export const CREATE_SCHEDULE: string = "create schedule";
 export const DELETE_SCHEDULE: string = "delete schedule";
+export const DELETE_EMPLOYEE: string = "delete employee";

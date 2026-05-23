@@ -51,4 +51,9 @@ export class EmployeesService {
     );
     return response.data;
   }
+
+  public async delete(id: number): Promise<void> {
+    const response = await client.delete(`${EmployeesService.EMPLOYEES}/${id}`);
+    return response.data;
+  }
 }

@@ -12,6 +12,7 @@ import styles from "./employees.module.scss";
 import { NewPassport } from "@/components/сommon/new-passport/new-passport";
 import { useAddPassport } from "@/hooks/add-passport.hook";
 import { useRemovePassport } from "@/hooks/remove-passport.hook";
+import { useDeleteEmployee } from "@/hooks/delete-employee.hook";
 
 function calculateSalary(positions: Position[]): number {
     let result = 0;
@@ -27,6 +28,7 @@ export const Employees: FC = (): JSX.Element => {
     const { mutate: removePassport } = useRemovePassport();
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [employeeId, setEmployeeId] = useState<number | null>(null);
+    const { mutate: deleteEmployee } = useDeleteEmployee();
     const navigate = useNavigate();
     const { data: users } = useUsers();
     const onClick = () => {
@@ -70,7 +72,8 @@ export const Employees: FC = (): JSX.Element => {
         <div className={styles.flex}>{employee.passports.map((passport) =>
             <span title={passport.data} key={passport.id}>{passport.name}
                 <span onClick={() => removePassport({employeeId: employee.id, passportId: passport.id})} className={styles.remove}>-</span></span>)}
-            <span onClick={() => openNewPassport(employee.id)} className={styles.add}>+</span></div>
+            <span onClick={() => openNewPassport(employee.id)} className={styles.add}>+</span></div>,
+        <Button type="button" onClick={() => deleteEmployee(employee.id)}>Видалити</Button>
     ])
     return (
         <>
