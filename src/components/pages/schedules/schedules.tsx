@@ -3,15 +3,22 @@ import { Table } from "@/components/ui/table/table";
 import { NewSchedule } from "@/components/сommon/new-schedule/new-schedule";
 import { useDeleteSchedule } from "@/hooks/delete-schedule.hook";
 import { useProfile } from "@/hooks/profile.hook";
+import { usePupils } from "@/hooks/pupils.hook";
+import { useScheduleByClass } from "@/hooks/schedule-by-class.hook";
 import { useSchedules } from "@/hooks/schedules.hook";
+import type { Schedule } from "@/types/schedule.type";
 import { day } from "@/utils/day.util";
-import { useState, type FC, type JSX, type ReactNode } from "react";
+import { useEffect, useState, type FC, type JSX, type ReactNode } from "react";
 
 export const Schedules: FC = (): JSX.Element => {
-    const { data: schedules } = useSchedules();
+    const { data: pupils } = usePupils();
+    const [classId, setClassId] = useState<number | null>(null);
+    const { data: allSchedules } = useSchedules();
+    const { data: schedulesByClass, refetch } = useScheduleByClass(classId);
     const { data: profile } = useProfile();
     const { mutate: deleteSchedule } = useDeleteSchedule();
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [schedules, setSchedules] = useState<Schedule[]>(allSchedules);
     const headers: ReactNode[] = [
         <>Клас</>,
         <>Дата</>,
@@ -20,7 +27,22 @@ export const Schedules: FC = (): JSX.Element => {
         <>Час кінця</>,
         <>Предмет</>
     ];
-    
+
+    useEffect(() => {
+    if (profile?.role === "PUPIL") {
+        const pupil = pupils?.find(p => p.id === profile?.id); 
+        if (pupil?.clazz?.id) {
+            setClassId(pupil.clazz.id);
+            refetch();
+            if (schedulesByClass && schedulesByClass.length > 0) {
+                setSchedules(schedulesByClass);
+            }
+        }
+    } else if (profile?.role === "ADMIN") {
+        setSchedules(allSchedules);
+    }
+}, [profile, pupils, schedulesByClass, allSchedules]);
+
     const data: ReactNode[][] = schedules === undefined ? [] : schedules.map(({
         clazz,
         date,
