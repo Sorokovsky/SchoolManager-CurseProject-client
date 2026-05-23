@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button/button";
+import { Field } from "@/components/ui/field/field";
 import { Table } from "@/components/ui/table/table";
 import { NewSchedule } from "@/components/сommon/new-schedule/new-schedule";
 import { useDeleteSchedule } from "@/hooks/delete-schedule.hook";
@@ -13,6 +14,7 @@ import { useEffect, useState, type FC, type JSX, type ReactNode } from "react";
 export const Schedules: FC = (): JSX.Element => {
     const { data: pupils } = usePupils();
     const [classId, setClassId] = useState<number | null>(null);
+    const [date, setDate] = useState<string | null>(null);
     const { data: allSchedules } = useSchedules();
     const { data: schedulesByClass, refetch } = useScheduleByClass(classId);
     const { data: profile } = useProfile();
@@ -41,9 +43,12 @@ export const Schedules: FC = (): JSX.Element => {
     } else if (profile?.role === "ADMIN") {
         setSchedules(allSchedules);
     }
-}, [profile, pupils, schedulesByClass, allSchedules]);
+}, [profile, pupils, schedulesByClass, allSchedules, refetch]);
 
-    const data: ReactNode[][] = schedules === undefined ? [] : schedules.map(({
+    const data: ReactNode[][] = schedules === undefined ? [] : schedules.filter(schedule => {
+        if (date === null) return true;
+        return schedule.date.toString() === date;
+    }).map(({
         clazz,
         date,
         dateOfWeek,
@@ -65,6 +70,14 @@ export const Schedules: FC = (): JSX.Element => {
     return (
         <>
             <h1 className="title">Розклад</h1>
+            <Field
+                required
+                label="Дата"
+                type="date"
+                onChange={event => {
+                    setDate(event.target.value);
+                }}
+            />
             <Table headers={headers} data={data} />
             {
                 profile?.role === "ADMIN" && (
