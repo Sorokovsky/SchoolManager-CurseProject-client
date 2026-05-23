@@ -21,7 +21,15 @@ export const Schedules: FC = (): JSX.Element => {
         <>Предмет</>
     ];
     
-    const data: ReactNode[][] = schedules === undefined ? [] : schedules.map(({clazz, date, dateOfWeek, endTime, startTime, subject, id}) => {
+    const data: ReactNode[][] = schedules === undefined ? [] : schedules.map(({
+        clazz,
+        date,
+        dateOfWeek,
+        endTime,
+        startTime,
+        subject,
+        id
+    }) => {
         return [
             `${clazz.studyYear}-${clazz.letter}`,
             date.toString(),
