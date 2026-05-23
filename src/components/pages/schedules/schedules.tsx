@@ -75,7 +75,9 @@ export const Schedules: FC = (): JSX.Element => {
                 label="Дата"
                 type="date"
                 onChange={event => {
-                    setDate(event.target.value);
+                    const date = event.target.value;
+                    if (date === "") setDate(null);
+                    else setDate(date);
                 }}
             />
             <Table headers={headers} data={data} />
