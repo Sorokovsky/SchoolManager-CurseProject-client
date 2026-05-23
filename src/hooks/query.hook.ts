@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useQuerying = <Data>(
   keys: string[],
-  queryFunction: () => Promise<Data>,
+  queryFunction: (payload: unknown | null) => Promise<Data>,
   retry: boolean | number = false,
 ) => {
   const query = useQuery<Data>({

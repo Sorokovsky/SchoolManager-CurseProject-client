@@ -12,6 +12,7 @@ export class EmployeesService {
   private static readonly ADD_PASSPORT: string = `${EmployeesService.EMPLOYEES}/add-passport`;
   private static readonly REMOVE_POSITION: string = `${EmployeesService.EMPLOYEES}/remove-position`;
   private static readonly REMOVE_PASSPORT: string = `${EmployeesService.EMPLOYEES}/remove-passport`;
+  private static readonly BY_POSITION: string = `${EmployeesService.EMPLOYEES}/by-position`;
 
   public async getAll(): Promise<Employee[]> {
     const response = await client.get(EmployeesService.EMPLOYEES);
@@ -54,6 +55,11 @@ export class EmployeesService {
 
   public async delete(id: number): Promise<void> {
     const response = await client.delete(`${EmployeesService.EMPLOYEES}/${id}`);
+    return response.data;
+  }
+
+  public async getByPosition(id: number): Promise<Employee[]> {
+    const response = await client.get(`${EmployeesService.BY_POSITION}/${id}`);
     return response.data;
   }
 }

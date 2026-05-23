@@ -1,6 +1,5 @@
-import { useEmployees } from "@/hooks/employees.hook";
 import type { Position } from "@/types/position.type";
-import { useState, type FC, type JSX, type ReactNode } from "react";
+import { useEffect, useState, type FC, type JSX, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router";
 import { employeesPage, newEmployee } from "@/routing/router";
 import { Button } from "@/components/ui/button/button";
@@ -13,6 +12,8 @@ import { NewPassport } from "@/components/сommon/new-passport/new-passport";
 import { useAddPassport } from "@/hooks/add-passport.hook";
 import { useRemovePassport } from "@/hooks/remove-passport.hook";
 import { useDeleteEmployee } from "@/hooks/delete-employee.hook";
+import { usePositions } from "@/hooks/positions.hook";
+import { useEmployeesByPosition } from "@/hooks/employees-by-position.hook";
 
 function calculateSalary(positions: Position[]): number {
     let result = 0;
@@ -23,12 +24,14 @@ function calculateSalary(positions: Position[]): number {
 }
 
 export const Employees: FC = (): JSX.Element => {
-    const { data: employees } = useEmployees();
+    const { data: positions } = usePositions();
+    const [positionId, setPositionId] = useState<number | null>(null);
     const { mutate: createPassport } = useAddPassport();
     const { mutate: removePassport } = useRemovePassport();
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [employeeId, setEmployeeId] = useState<number | null>(null);
     const { mutate: deleteEmployee } = useDeleteEmployee();
+    const { data: employees, refetch } = useEmployeesByPosition(positionId);
     const navigate = useNavigate();
     const { data: users } = useUsers();
     const onClick = () => {
@@ -71,18 +74,43 @@ export const Employees: FC = (): JSX.Element => {
         employee.address,
         <div className={styles.flex}>{employee.passports.map((passport) =>
             <span title={passport.data} key={passport.id}>{passport.name}
-                <span onClick={() => removePassport({employeeId: employee.id, passportId: passport.id})} className={styles.remove}>-</span></span>)}
+                <span onClick={() => removePassport({ employeeId: employee.id, passportId: passport.id })} className={styles.remove}>-</span></span>)}
             <span onClick={() => openNewPassport(employee.id)} className={styles.add}>+</span></div>,
         <Button type="button" onClick={() => deleteEmployee(employee.id)}>Видалити</Button>
-    ])
+    ]);
+
+    useEffect(() => {
+        refetch();
+    }, [positionId, refetch])
     return (
         <>
             <h1 className="title">Працівники</h1>
+            <label>
+                <span>За посадою</span>
+                <select onChange={event => {
+                    const value = event.target.value;
+                    setPositionId(value === "null" ? null : +value);
+                    
+                }}>
+                    <option value={"null"}>Всі посади</option>
+                    {positions?.map(position => {
+                        return (
+                            <option key={position.id} value={position.id}>
+                                {position.name}
+                            </option>
+                        )
+                    })}
+                </select>
+            </label>
             <Table headers={headers} data={data} />
             {
-                (users && users.length !== 0) && <Button type="button" onClick={onClick}>Новий</Button>
+                (users && users.length !== 0) && (
+                    <>
+                        <Button type="button" onClick={onClick}>Новий</Button>
+                        <NewPassport close={closeModal} isOpen={isModalOpen} send={addPassport} />
+                    </>
+                )
             }
-            <NewPassport close={closeModal} isOpen={isModalOpen} send={addPassport} />
         </>
     );
 }
