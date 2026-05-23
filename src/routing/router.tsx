@@ -18,7 +18,7 @@ import { createBrowserRouter } from "react-router";
 const pupilsPage: Route = {
   element: <Pupils />,
   path: "/pupils",
-  roles: ["EMPLOYEE", "ADMIN"],
+  roles: ["ADMIN", "EMPLOYEE", "PARENT"],
   isAuthenticated: true,
   title: "Учні"
 };
@@ -42,7 +42,7 @@ const schedulesPage: Route = {
   path: '/schedules',
   isAuthenticated: true,
   element: <Schedules />,
-  roles: ["PUPIL", "EMPLOYEE", "ADMIN"],
+  roles: ["PUPIL", "EMPLOYEE", "ADMIN", "PARENT"],
   title: "Розклад"
 };
 
@@ -65,7 +65,7 @@ export const loginPage: Route = {
 export const positionsPage: Route = {
   path: "/positions",
   isAuthenticated: true,
-  roles: ["ADMIN"],
+  roles: ["ADMIN", "EMPLOYEE"],
   element: <Positions />,
   title: "Посади"
 }
@@ -107,7 +107,7 @@ export const classesPage: Route = {
   isAuthenticated: true,
   title: "Класи",
   element: <Classes />,
-  roles: null
+  roles: ["ADMIN", "PUPIL", "EMPLOYEE"]
 }
 
 export const subjectsPage: Route = {

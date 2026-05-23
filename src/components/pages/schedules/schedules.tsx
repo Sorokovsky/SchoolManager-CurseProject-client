@@ -40,7 +40,7 @@ export const Schedules: FC = (): JSX.Element => {
                 setSchedules(schedulesByClass);
             }
         }
-    } else if (profile?.role === "ADMIN") {
+    } else {
         setSchedules(allSchedules);
     }
 }, [profile, pupils, schedulesByClass, allSchedules, refetch]);
@@ -63,7 +63,9 @@ export const Schedules: FC = (): JSX.Element => {
             day(dateOfWeek),
             startTime,
             endTime,
-            <span title={`${subject.teacher.lastName} ${subject.teacher.firstName} ${subject.teacher.middleName}`}>{subject.name}</span>,
+            <span title={`${subject.teacher.lastName} ${subject.teacher.firstName} ${subject.teacher.middleName}`}>
+                {subject.name}
+            </span>,
             profile?.role === "ADMIN" && <Button type="button" onClick={() => deleteSchedule(id)}>Видалити</Button>
         ]
     });

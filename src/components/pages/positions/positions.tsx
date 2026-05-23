@@ -9,6 +9,7 @@ import { useState, type FC, type JSX, type ReactNode } from "react";
 
 export const Positions: FC = (): JSX.Element => {
     const { data: positions } = usePositions();
+    const { data: profile } = useProfile();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { mutate: addPosition } = useNewPosition();
     const { data: user } = useProfile();
@@ -27,7 +28,7 @@ export const Positions: FC = (): JSX.Element => {
             .map(requirement => <span title={requirement.description} key={requirement.id}>{requirement.name} </span>),
         position.responsibilities
             .map(resposibility => <span title={resposibility.description} key={resposibility.id}>{resposibility.name}  </span>),
-        <Button onClick={() => deletePosition(position.id)} type="button">Видалити</Button>
+        profile.role === "ADMIN" && <Button onClick={() => deletePosition(position.id)} type="button">Видалити</Button>
     ]);
     return (
         <>

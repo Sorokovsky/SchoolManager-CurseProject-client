@@ -28,7 +28,7 @@ export const Classes: FC = (): JSX.Element => {
         const pupil: Pupil | undefined = pupils?.find(item => item.id === profile.id);
         if (pupil === undefined) return true;
         return pupil.clazz.id === clazz.id;
-    }) : [])
+    }) : classess)
         .map(clazz => {
         return [
             `${clazz.studyYear}-${clazz.letter}`,
