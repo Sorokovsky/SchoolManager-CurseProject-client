@@ -4,6 +4,7 @@ import { client } from "@/utils/http-client";
 
 export class ClassesService {
   private static readonly CLASSES: string = "/classes";
+  private static readonly BY_TYPE: string = `${ClassesService.CLASSES}/by-class-type`;
 
   public async getAll(): Promise<Class[]> {
     const response = await client.get(ClassesService.CLASSES);
@@ -17,6 +18,11 @@ export class ClassesService {
 
   public async create(payload: AddClass): Promise<void> {
     const response = await client.post(ClassesService.CLASSES, payload);
+    return response.data;
+  }
+
+  public async getByType(id: number): Promise<Class[]> {
+    const response = await client.get(`${ClassesService.BY_TYPE}/${id}`);
     return response.data;
   }
 }
