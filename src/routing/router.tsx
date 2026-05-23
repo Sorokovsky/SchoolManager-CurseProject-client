@@ -107,7 +107,7 @@ export const classesPage: Route = {
   isAuthenticated: true,
   title: "Класи",
   element: <Classes />,
-  roles: ['ADMIN']
+  roles: null
 }
 
 export const subjectsPage: Route = {

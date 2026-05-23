@@ -1,7 +1,7 @@
 import type { Position } from "@/types/position.type";
 import { useEffect, useState, type FC, type JSX, type ReactNode } from "react";
-import { Link, useNavigate } from "react-router";
-import { employeesPage, newEmployee } from "@/routing/router";
+import { useNavigate } from "react-router";
+import { newEmployee } from "@/routing/router";
 import { Button } from "@/components/ui/button/button";
 import { useUsers } from "@/hooks/users.hook";
 import { convertGender } from "@/utils/gender.util";
@@ -64,7 +64,7 @@ export const Employees: FC = (): JSX.Element => {
     ]
 
     const data: ReactNode[][] = employees === undefined ? [] : employees.map(employee => [
-        <Link to={`${employeesPage.path}/${employee.id}`}>{employee.login}</Link>,
+        employee.login,
         `${employee.lastName} ${employee.firstName} ${employee.middleName}`,
         <>{calculateSalary(employee.positions)} грн</>,
         <EmployeePositions positions={employee.positions} employeeId={employee.id} />,
